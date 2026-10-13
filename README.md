@@ -17,6 +17,12 @@
 
 ---
 
+🌐 Live Website
+
+🎵 Open PinkMic
+https://pinkmic-karaoke-web-application.onrender.com/
+
+
 ## 💗 About PinkMic
 
 **PinkMic** is a browser-based karaoke application designed to make singing more accessible, personal, and fun. It combines a searchable music library with YouTube karaoke playback and local MP3 audio support in a clean, responsive interface.
