@@ -1,0 +1,210 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff1f7">
+  <title>PinkMic — Your Karaoke Space</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <a class="brand" href="#">
+        <span class="brand-icon">♫</span>
+        <span>Pink<span class="brand-accent">Mic</span></span>
+      </a>
+
+      <p class="side-label">YOUR SPACE</p>
+      <button class="nav-item active" data-view="all" aria-label="All songs">⌂ <span>All Songs</span></button>
+      <button class="nav-item" data-view="favorites" aria-label="Favorites">♡ <span>Favorites</span></button>
+      <button class="nav-item" data-view="queue" aria-label="Up next">☷ <span>Up Next <span id="queueCount" class="queue-count">0</span></span></button>
+
+      <p class="side-label">EXPLORE GENRES</p>
+      <button class="genre-link" data-genre="OPM">🇵🇭 OPM</button>
+      <button class="genre-link" data-genre="Pop">🎤 Pop</button>
+      <button class="genre-link" data-genre="K-pop">💜 K-pop</button>
+      <button class="genre-link" data-genre="R&B">🎧 R&B</button>
+      <button class="genre-link" data-genre="Rock">🎸 Rock</button>
+      <button class="genre-link" data-genre="Love Songs">💗 Love Songs</button>
+      <button class="genre-link" data-genre="Other">✨ Other</button>
+
+      <div class="sidebar-bottom">
+        <div class="mini-note">♡ Your voice, your moment.</div>
+        <p>Made for your next favorite song.</p>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">YOUR PERSONAL KARAOKE ROOM</p>
+          <h1>Find your <span>next song.</span></h1>
+        </div>
+        <div class="search-box">
+          <span>⌕</span>
+          <input id="searchInput" type="search"
+            placeholder="Search songs or artists..." aria-label="Search songs">
+          <kbd id="keyboardShortcut">Ctrl K</kbd>
+        </div>
+      </header>
+
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="hero-pill">✦ YOUR STAGE IS READY</span>
+          <h2>Sing it like<br>nobody's <em>listening.</em></h2>
+          <p>From OPM classics to your favorite K-pop hits, your next performance starts here.</p>
+          <button id="browseButton" class="primary-btn" type="button">Explore the library ↗</button>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="orb orb-one"></div>
+          <div class="orb orb-two"></div>
+          <div class="music-note note-one">♪</div>
+          <div class="mic-emoji">🎤</div>
+          <div class="music-note note-two">♫</div>
+          <div class="hero-caption">YOUR MOMENT ✦</div>
+        </div>
+      </section>
+
+      <section class="add-panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">GROW YOUR COLLECTION</p>
+            <h2>Add your songs</h2>
+          </div>
+          <span class="small-tag">YOUTUBE + MP3</span>
+        </div>
+
+        <div class="add-grid">
+          <form id="youtubeForm" class="add-card">
+            <div class="add-icon youtube-icon">▶</div>
+            <h3>Add a YouTube karaoke video</h3>
+            <p>Paste a YouTube karaoke link to add a playable song.</p>
+            <label for="ytTitle">Song title</label>
+            <input id="ytTitle" required maxlength="100" placeholder="e.g. My Favorite Song">
+            <label for="ytArtist">Artist</label>
+            <input id="ytArtist" maxlength="100" placeholder="e.g. Original artist">
+            <label for="ytGenre">Genre</label>
+            <select id="ytGenre">
+              <option>OPM</option><option>Pop</option><option>K-pop</option>
+              <option>R&B</option><option>Rock</option><option>Love Songs</option><option>Other</option>
+            </select>
+            <label for="ytUrl">YouTube video URL</label>
+            <input id="ytUrl" required type="url" placeholder="https://www.youtube.com/watch?v=...">
+            <button class="primary-btn full-btn" type="submit">Add YouTube song +</button>
+          </form>
+
+          <div class="add-card">
+            <div class="add-icon mp3-icon">♫</div>
+            <h3>Upload your MP3 files</h3>
+            <p>Add audio files from your computer to your personal library.</p>
+            <label class="upload-area" for="mp3Input">
+              <span class="upload-symbol">↑</span>
+              <strong>Choose MP3 files</strong>
+              <span>Upload one or several files at once</span>
+              <span class="upload-types">MP3 AUDIO</span>
+            </label>
+            <input id="mp3Input" type="file" accept="audio/mpeg,.mp3" multiple hidden>
+            <p class="upload-help">Local files are available in this browser session. Keep your original files safe.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="librarySection" class="library-section">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">THE SONG COLLECTION</p>
+            <h2 id="libraryTitle">Discover songs</h2>
+            <p id="songCount" class="muted">Loading library...</p>
+          </div>
+          <div class="filters">
+            <select id="genreFilter" aria-label="Filter by genre">
+              <option value="all">All genres</option>
+              <option>OPM</option><option>Pop</option><option>K-pop</option>
+              <option>R&B</option><option>Rock</option><option>Love Songs</option><option>Other</option>
+            </select>
+            <select id="sourceFilter" aria-label="Filter by source">
+              <option value="all">All sources</option>
+              <option value="youtube">YouTube</option>
+              <option value="mp3">My MP3s</option>
+              <option value="catalog">Catalog</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="songGrid" class="song-grid"></div>
+        <div id="emptyState" class="empty-state" hidden>
+          <span>🎶</span>
+          <h3>No songs found</h3>
+          <p>Try another search or add a song to your library.</p>
+          <button id="clearFilters" class="secondary-btn" type="button">Clear filters</button>
+        </div>
+      </section>
+
+      <section class="player-panel">
+        <div class="player-heading">
+          <div>
+            <p class="eyebrow">NOW ON YOUR STAGE</p>
+            <h2>Sing along</h2>
+          </div>
+          <span id="playerStatus" class="status-pill">READY TO SING</span>
+        </div>
+
+        <div class="player-content">
+          <div class="now-playing">
+            <div id="nowArt" class="now-art">🎤</div>
+            <p class="eyebrow">NOW PLAYING</p>
+            <h3 id="nowTitle">Choose a song</h3>
+            <p id="nowArtist" class="muted">Your karaoke session starts here.</p>
+            <div id="sourceLabel" class="source-label">No song selected</div>
+            <div class="player-controls">
+              <button id="prevButton" class="control-btn" type="button" title="Previous song" aria-label="Previous song">|◀</button>
+              <button id="playButton" class="play-btn" type="button" aria-label="Play or pause">▶</button>
+              <button id="nextButton" class="control-btn" type="button" title="Next song" aria-label="Next song">▶|</button>
+            </div>
+            <div id="mp3Controls" class="mp3-controls" hidden>
+              <span id="currentTime">0:00</span>
+              <input id="seekBar" type="range" min="0" max="100" value="0" aria-label="Seek audio">
+              <span id="duration">0:00</span>
+              <label class="volume-label">Volume
+                <input id="volumeBar" type="range" min="0" max="1" step="0.05" value="0.8" aria-label="Volume">
+              </label>
+            </div>
+            <p id="playerMessage" class="player-message">Choose an MP3 or a linked YouTube song to begin.</p>
+          </div>
+
+          <div class="video-panel">
+            <div class="video-top">
+              <div>
+                <h3>🎬 Karaoke screen</h3>
+                <p>Lyrics and vocals depend on the video you choose.</p>
+              </div>
+            </div>
+            <div id="videoPlaceholder" class="video-placeholder">
+              <div class="placeholder-mic">🎤</div>
+              <strong>Your stage is waiting</strong>
+              <span>Select a playable song from your library.</span>
+            </div>
+            <iframe id="youtubePlayer" title="PinkMic YouTube karaoke player"
+              allow="autoplay; encrypted-media; picture-in-picture; fullscreen"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen hidden></iframe>
+            <audio id="audioPlayer" preload="metadata"></audio>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <span>♫ <strong>PinkMic</strong> — made for music lovers</span>
+        <span>Sing kindly. Sing loudly. Sing your heart out. ♡</span>
+      </footer>
+    </main>
+  </div>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
